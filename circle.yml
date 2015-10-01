@@ -23,7 +23,7 @@ test:
     - cd sc-*-linux && ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY --tunnel-identifier $CIRCLE_BUILD_NUM-$CIRCLE_NODE_INDEX --readyfile ~/sauce_is_ready:
         background: true
     - while [ ! -e ~/sauce_is_ready ]; do sleep 1; done
-    - case $CIRCLE_NODE_INDEX in 0) kalite manage test --bdd-only ;; 1) kalite manage test --no-bdd;; esac:
+    - case $CIRCLE_NODE_INDEX in 0) kalite manage test --bdd-only ;; 1) kalite manage test --no-bdd;; 2) printf '{"sha":"%s","repo":"%s","results":"%s"}\n' "$CIRCLE_SHA1" "$CIRCLE_PR_USERNAME:$CIRCLE_PR_REPONAME" "{'foo': 'bar'}" > benchmark_results.json; curl --data "`cat benchmark_results.json`" https://kalite-benchmark-ci.herokuapp.com/hooks/benchmark ;; esac:
         parallel: true
     - jshint kalite/*/static/js/*/
   post:
