@@ -26,7 +26,6 @@ test:
     - case $CIRCLE_NODE_INDEX in 0) kalite manage test --bdd-only ;; 1) kalite manage test --no-bdd;; 2) printf '{"sha":"%s","repo":"%s","results":%s}\n' "$CIRCLE_SHA1" "$CIRCLE_PR_USERNAME:$CIRCLE_PR_REPONAME" `python benchmark.py`} > benchmark_results.json; curl --data "`cat benchmark_results.json`" https://kalite-benchmark-ci.herokuapp.com/builds/hooks/benchmark ;; esac:
         parallel: true
     - jshint kalite/*/static/js/*/
-        parallel: true
     # TODO: replace below with "make lint" when we're pep8
     - npm install -g jshint
     - jshint kalite/*/static/js/*/
