@@ -6,6 +6,7 @@ import os
 import glob
 import os.path as osp
 import psutil
+import json
 
 HOME = "http://localhost:8008/"
 DEVNULL = open(os.devnull, 'wb')
@@ -108,4 +109,4 @@ if __name__ == '__main__':
         memory_usage['visit_home'] = record_usage(browser, visit_home)
         memory_usage['play_video'] = record_usage(browser, play_video)
 
-    print memory_usage
+    print json.dumps(memory_usage)
