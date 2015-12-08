@@ -6,3 +6,4 @@ sphinx
 #cli2man
 memory_profiler
 psutil
+splinter
