@@ -69,8 +69,8 @@ def get_profile_filenames(args):
 def kill_with_children(pid):
     parent = psutil.Process(pid)
     for child in parent.children(recursive=True):  # or parent.children() for recursive=False
-        child.send_signal(signal.SIGINT)
-    parent.send_signal(signal.SIGINT)
+        child.send_signal(signal.SIGTERM)
+    parent.send_signal(signal.SIGTERM)
 
 def visit_home(browser):
     browser.visit(HOME)
@@ -80,11 +80,12 @@ def play_video(browser):
 
 def record_usage(browser, fn):
     server = subprocess.Popen(['mprof', 'run', 'python', 'kalitectl.py', 'start', '--foreground'], stdout=DEVNULL, stderr=DEVNULL)
+    # wait for server to start
+    sleep(5)
     fn(browser)
     kill_with_children(server.pid)
     sleep(5)
     filename =  get_profile_filenames(['-1'])[0]
-    print filename
     memory_usage = []
     peak_usage = 0
     with open(filename) as f:
