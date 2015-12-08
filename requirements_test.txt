@@ -12,3 +12,7 @@ sauceclient==0.2.1
 # Used for building assets, which is necessary for testing
 pyyaml==3.11
 
+# benchmarking
+memory_profiler
+psutil
+splinter

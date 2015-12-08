@@ -4,6 +4,3 @@ django-debug-toolbar # Version was not described in previously bundled files, us
 pep8
 sphinx
 #cli2man
-memory_profiler
-psutil
-splinter
